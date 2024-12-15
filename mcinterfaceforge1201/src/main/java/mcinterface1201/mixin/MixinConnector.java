@@ -1,4 +1,4 @@
-package mcinterface1192.mixin;
+package mcinterface1201.mixin;
 
 import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.asm.mixin.connect.IMixinConnector;

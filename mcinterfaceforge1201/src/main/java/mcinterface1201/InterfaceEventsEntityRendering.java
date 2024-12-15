@@ -143,7 +143,7 @@ public class InterfaceEventsEntityRendering {
             lastScreenHeight = screenHeight;
         }
 
-        InterfaceRender.renderGUI(event.getPoseStack(), mouseX, mouseY, screenWidth, screenHeight, partialTicks, updateGUIs);
+        InterfaceRender.renderGUI(event.getGuiGraphics().pose(), mouseX, mouseY, screenWidth, screenHeight, partialTicks, updateGUIs);
     }
 
     /**
@@ -205,7 +205,7 @@ public class InterfaceEventsEntityRendering {
                 riderTotalTransformation.applyRotation(riderBodyOrientation);
                 riderTotalTransformation.applyScaling(entityScale);
                 riderTotalTransformation.applyTranslation(0, entityWrapper.getSeatOffset(), 0);
-                event.getPoseStack().last().pose().multiply(InterfaceRender.convertMatrix4f(riderTotalTransformation));
+                event.getPoseStack().last().pose().mul(InterfaceRender.convertMatrix4f(riderTotalTransformation));
             }
 
             needToPopMatrix = true;

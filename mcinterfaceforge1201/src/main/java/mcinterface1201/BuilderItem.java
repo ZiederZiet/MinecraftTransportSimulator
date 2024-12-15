@@ -215,12 +215,6 @@ public class BuilderItem extends Item implements IBuilderItemInterface {
             return super.use(world, player, hand);
         }
     }
-
-    /**
-     * This is called by the main MC system after the item's use timer has expired.
-     * This is normally instant, as {@link #getMaxItemUseDuration(ItemStack)} is 0.
-     * If this item is food, and a player is holding the item, have it apply to them.
-     */
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entityLiving) {
         if (item instanceof IItemFood) {

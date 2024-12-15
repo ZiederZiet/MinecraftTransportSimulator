@@ -1,12 +1,12 @@
-package mcinterface1192.mixin.client;
+package mcinterface1201.mixin.client;
 
+import mcinterface1201.WrapperEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import mcinterface1192.WrapperEntity;
 import minecrafttransportsimulator.entities.components.AEntityB_Existing;
 import minecrafttransportsimulator.entities.instances.PartSeat;
 import net.minecraft.client.model.VillagerModel;

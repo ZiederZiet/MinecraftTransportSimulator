@@ -299,7 +299,7 @@ public class InterfaceInput implements IInterfaceInput {
     @SubscribeEvent
     public static void onIVMouseScroll(ScreenEvent.MouseScrolled.Post event) {
         if (InterfaceManager.clientInterface.isGUIOpen()) {
-            lastScrollValue = (int) event.getDeltaX();
+            lastScrollValue = (int) event.getScrollDelta();
             event.setCanceled(true);
         }
     }

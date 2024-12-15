@@ -8,6 +8,7 @@ import minecrafttransportsimulator.mcinterface.AWrapperWorld;
 import minecrafttransportsimulator.mcinterface.IWrapperItemStack;
 import minecrafttransportsimulator.mcinterface.IWrapperNBT;
 import minecrafttransportsimulator.mcinterface.IWrapperPlayer;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +35,7 @@ public class WrapperItemStack implements IWrapperItemStack {
     @Override
     public boolean isCompleteMatch(IWrapperItemStack other) {
         ItemStack otherStack = ((WrapperItemStack) other).stack;
-        return otherStack.sameItem(stack) && (otherStack.hasTag() ? otherStack.getTag().equals(stack.getTag()) : !stack.hasTag());
+        return ItemStack.isSameItemSameTags(otherStack, stack);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class WrapperItemStack implements IWrapperItemStack {
     public IWrapperItemStack getSmeltedItem(AWrapperWorld world) {
         Level mcWorld = ((WrapperWorld) world).world;
         List<SmeltingRecipe> results = mcWorld.getRecipeManager().getAllRecipesFor(RecipeType.SMELTING);
-        return new WrapperItemStack(results.isEmpty() ? ItemStack.EMPTY : results.get(0).getResultItem());
+        return new WrapperItemStack(results.isEmpty() ? ItemStack.EMPTY : results.get(0).getResultItem(mcWorld.registryAccess()));
     }
 
     @Override

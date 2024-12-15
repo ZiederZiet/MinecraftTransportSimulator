@@ -1,4 +1,4 @@
-package mcinterface1192.mixin.client;
+package mcinterface1201.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;

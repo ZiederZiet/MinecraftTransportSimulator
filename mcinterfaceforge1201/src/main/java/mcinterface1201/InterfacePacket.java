@@ -71,7 +71,7 @@ class InterfacePacket implements IInterfacePacket {
      * Used for handling packets arriving on the server.
      */
     private static AWrapperWorld getServerWorld(Supplier<NetworkEvent.Context> ctx) {
-        return WrapperWorld.getWrapperFor(ctx.get().getSender().level);
+        return WrapperWorld.getWrapperFor(ctx.get().getSender().level());
     }
 
     @Override

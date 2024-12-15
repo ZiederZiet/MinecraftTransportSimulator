@@ -58,7 +58,7 @@ public class InterfaceInterface {
     }
 
     public static BuilderTileEntity toExternal(ATileEntityBase<?> tile) {
-        return (BuilderTileEntity) ((WrapperWorld) tile.world).world.getBlockEntity(new BlockPos(tile.position.x, tile.position.y, tile.position.z));
+        return (BuilderTileEntity) ((WrapperWorld) tile.world).world.getBlockEntity(new BlockPos((int) tile.position.x, (int) tile.position.y, (int) tile.position.z));
     }
 
     public static WrapperEntity toInternal(Entity entity) {

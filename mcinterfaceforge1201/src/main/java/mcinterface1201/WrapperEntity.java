@@ -20,7 +20,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,7 +53,7 @@ public class WrapperEntity implements IWrapperEntity {
         if (entity instanceof Player) {
             return WrapperPlayer.getWrapperFor((Player) entity);
         } else if (entity != null) {
-            Map<Entity, WrapperEntity> entityWrappers = entity.level.isClientSide ? entityClientWrappers : entityServerWrappers;
+            Map<Entity, WrapperEntity> entityWrappers = entity.level().isClientSide ? entityClientWrappers : entityServerWrappers;
             WrapperEntity wrapper = entityWrappers.get(entity);
             if (wrapper == null || !wrapper.isValid() || entity != wrapper.entity) {
                 wrapper = new WrapperEntity(entity);
@@ -391,7 +390,7 @@ public class WrapperEntity implements IWrapperEntity {
         if (damage.language == null) {
             throw new IllegalArgumentException("ERROR: Cannot attack an entity with a damage of no type and language component!");
         }
-        DamageSource newSource = new EntityDamageSource(damage.language.getCurrentValue(), damage.entityResponsible != null ? ((WrapperEntity) damage.entityResponsible).entity : null) {
+        DamageSource newSource = new DamageSource(damage.language.getCurrentValue(), damage.entityResponsible != null ? ((WrapperEntity) damage.entityResponsible).entity : null) {
             @Override
             public Component getLocalizedDeathMessage(LivingEntity player) {
                 if (damage.entityResponsible != null) {
@@ -466,9 +465,9 @@ public class WrapperEntity implements IWrapperEntity {
     @SubscribeEvent
     public static void onIVWorldUnload(LevelEvent.Unload event) {
         if (event.getLevel().isClientSide()) {
-            entityClientWrappers.keySet().removeIf(entity1 -> event.getLevel() == entity1.level);
+            entityClientWrappers.keySet().removeIf(entity1 -> event.getLevel() == entity1.level());
         } else {
-            entityServerWrappers.keySet().removeIf(entity1 -> event.getLevel() == entity1.level);
+            entityServerWrappers.keySet().removeIf(entity1 -> event.getLevel() == entity1.level());
         }
     }
 }
